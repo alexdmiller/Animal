@@ -31,6 +31,11 @@ Systems
 
 The game logic for your game goes into systems. Each system only processes entities that are relevant to that system. For example, one could write a PhysicsSystem. A PhysicsSystem cares about entities which have Position, Velocity and Weight components. The system can query the GameBoard for entities which have a specific set of components.
 
+Aspects
+--------
+
+Systems are interested in entities which have a specific combination of components. In the example above, the PhysicsSystem cares about entities with Position, Velocity and Weight. This set of components is called an "Aspect". Aspects determine whether or not a system should process a component. 
+
 References
 ----------
 
