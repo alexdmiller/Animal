@@ -1,6 +1,20 @@
 Description
 ===========
 
+In a general sense, this framework manages the creation and interaction of game objects. What do we mean by a game object? In classic object-oriented game programming, a class is written for every object in the game universe. Some redundancy can be removed by creating a class hierarchy of game objects, but the system inevitably becomes rigid and complicated as more classes are added. Furthermore, the class hierarchy lacks modularity, because multiple-inheritance is either not possible or confusing.
+
+In a Component-Entity-System framework, the code that goes inside of a game object is split between three new pieces: components, entities, and systems.
+
+Entities
+--------
+
+Components
+--------
+
+Systems
+--------
+
+
 References
 ----------
 
