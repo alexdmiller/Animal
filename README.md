@@ -36,6 +36,11 @@ Aspects
 
 Systems are interested in entities which have a specific combination of components. In the example above, the PhysicsSystem cares about entities with Position, Velocity and Weight. This set of components is called an "Aspect". Aspects determine whether or not a system should process a component. 
 
+Class Diagram
+-------------
+
+![UML Class Diagram](docs/uml/animal_model.png)
+
 References
 ----------
 
