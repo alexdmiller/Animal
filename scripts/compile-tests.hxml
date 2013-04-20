@@ -1,0 +1,3 @@
+-neko build/test/main.n 
+-main com.animalsplaygames.animal.test.TestMain
+-cp src
