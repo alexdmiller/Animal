@@ -21,9 +21,6 @@ class EventEmitter {
    *  event listeners registered.
    **/
   public function new() {
-    if (EventEmitter.tracking) {
-      EventEmitter.trackEmitter(this);
-    }
     listeners = new Hash<List<Dynamic -> Void>>();
   }
   
