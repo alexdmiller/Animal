@@ -1,8 +1,5 @@
 package com.animalsplaygames.animal.events;
 
-import flash.ui.ContextMenuItem;
-import flash.events.ContextMenuEvent;
-
 /**
  *  An object which registers event listeners. Can be used as a
  *  stand-alone event manager, or extended to give another class
@@ -11,50 +8,6 @@ import flash.events.ContextMenuEvent;
  *  @author alexmiller@gmail.com
  **/
 class EventEmitter {
-  private static var tracking : Bool = false;
-  private static var emitters : List<EventEmitter>;
-
-  public static function startTracking() : Void {
-    tracking = true;
-    var emitterItem : ContextMenuItem =
-        new ContextMenuItem("Trace Emitters", true);
-    emitterItem.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT,
-        onTraceEmittersSelected);
-    flash.Lib.current.contextMenu.customItems.push(emitterItem);
-  }
-
-  private static function onTraceEmittersSelected(event : ContextMenuEvent) : Void {
-    traceEmitters();
-  }
-
-  private static function trackEmitter(emitter : EventEmitter) : Void {
-    if (emitters == null) {
-      emitters = new List<EventEmitter>();
-    }
-    emitters.add(emitter);
-  }
-
-  public static function traceEmitters() : Void {
-    var totalSum : Int = 0;
-    for (emitter in emitters) {
-      var totalFunctions : Int = 0;
-      var emitterList : String = "";
-      for (event in emitter.listeners.keys()) {
-        var listenersArray = emitter.listeners.get(event);
-        emitterList += " " + event;
-        if (listenersArray != null) {
-          totalFunctions += listenersArray.length;
-        }
-      }
-      totalSum += totalFunctions;
-      if (totalFunctions > 0) {
-        trace(emitter + ": " + totalFunctions + ", " + emitterList);
-      }
-    }
-    trace(totalSum + " listener functions registered.");
-    trace(emitters.length + " emitters created total.");
-  }
-
   /**
    *  A hash from event names (Strings) to lists of event handler
    *  functions.
