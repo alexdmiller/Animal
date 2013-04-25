@@ -1,11 +1,18 @@
 package com.animalsplaygames.animal.core;
 
 public class EntityTable {
-  private var entities;
-  private var aspects;
+  /**
+   * Maps entity IDs to arrays of components for that entity.
+   */
+  private var entities : Hash<Array<Component>>;
+
+  /**
+   * Maps aspects (groups of components) to entities that have those components.
+   */
+  private var aspects : Hash<Array<Entity>>;
 
   public function new() {
-
+    
   }
 
   public function createEntity() : Entity {
