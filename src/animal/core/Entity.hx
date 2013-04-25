@@ -1,7 +1,9 @@
 package animal.core;
 
 class Entity {
-  public function new() {
-    
+  public var id(default, null) : Int;
+
+  public function new(id : Int) {
+    this.id = id;
   }
 }

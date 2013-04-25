@@ -2,10 +2,26 @@ package;
 
 import massive.munit.Assert;
 import animal.core.EntityTable;
+import animal.core.Entity;
 
 class EntityTableTest extends haxe.unit.TestCase {
+  private var testTable : EntityTable;
+
+  @Before
+  override public function setup() : Void {
+    testTable = new EntityTable();
+  }
+
   @Test
-  public function test_constructor() {
-    var table = new EntityTable();
+  public function createOneEntity_hasID() {
+    var e : Entity = testTable.createEntity();
+    Assert.isNotNaN(e.id);
+  }
+
+  @Test
+  public function createTwoEntities_uniqueIDs() {
+    var e1 : Entity = testTable.createEntity();
+    var e2 : Entity = testTable.createEntity();    
+    Assert.areNotEqual(e1.id, e2.id);
   }
 }

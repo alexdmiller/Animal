@@ -1,23 +1,40 @@
 package animal.core;
 
+import haxe.FastList;
+
 class EntityTable {
   /**
    * Maps entity IDs to arrays of components for that entity.
-   */
-  private var entities : Hash<Array<Component>>;
+   **/
+  private var entities : Array<Array<Component>>;
+
+  private var freeIDs : FastList<{id : Int, lowerBound : Bool}>;
 
   /**
    * Maps aspects (groups of components) to entities that have those components.
-   */
+   **/
   private var aspects : Hash<Array<Entity>>;
 
+  /**
+   * Initially there are no entities, components or aspects stored in the table.
+   */
   public function new() {
-    entities = new Hash<Array<Component>>();
+    entities = new Array<Array<Component>>();
     aspects = new Hash<Array<Entity>>();
+    freeIDs = new FastList<{id : Int, lowerBound : Bool}>();
+    freeIDs.add({id: 0, lowerBound: false});
   }
 
-  public function createEntity() : Entity {
-    return null;
+  /**
+   * Adds an entity to the table and returns it. The entity contains the passed
+   * components.
+   * @param components Components to be added to the new Entity
+   * @return The new Entity that is inside the table
+   * TODO: events
+   **/
+  public function createEntity(?components : Array<Component>) : Entity {
+    var e : Entity  = new Entity(getAvailableEntityID());
+    return e;
   }
 
   public function removeEntity(entity : Entity) : Void {
@@ -38,5 +55,11 @@ class EntityTable {
 
   public function unregisterAspect(aspect) {
 
+  }
+
+  private function getAvailableEntityID() : Int {
+    var idInfo : {id : Int, lowerBound : Bool} = freeIDs.pop();
+    freeIDs.add({id: idInfo.id + 1, lowerBound: false});
+    return idInfo.id;
   }
 }
