@@ -1,4 +1,4 @@
-package com.animalsplaygames.animal.core;
+package animal.core;
 
 public class EntityTable {
   /**

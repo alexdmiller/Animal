@@ -1,4 +1,4 @@
-package com.animalsplaygames.animal.events;
+package animal.events;
 
 /**
  *  An object which registers event listeners. Can be used as a

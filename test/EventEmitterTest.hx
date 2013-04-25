@@ -1,7 +1,7 @@
 package;
 
 import massive.munit.Assert;
-import com.animalsplaygames.animal.events.EventEmitter;
+import animal.events.EventEmitter;
 
 class EventEmitterTest extends haxe.unit.TestCase {
   /*public function test_on_null_throwsError() {
