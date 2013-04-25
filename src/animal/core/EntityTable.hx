@@ -31,14 +31,24 @@ class EntityTable {
    * @param components Components to be added to the new Entity
    * @return The new Entity that is inside the table
    * TODO: events
+   * TODO: add to table
    **/
   public function createEntity(?components : Array<Component>) : Entity {
     var e : Entity  = new Entity(getAvailableEntityID());
+    if (components != null) {
+      entities[e.id] = components;
+    } else {
+      entities[e.id] = new Array<Component>();
+    }
     return e;
   }
 
   public function removeEntity(entity : Entity) : Void {
 
+  }
+
+  public function getComponents(entity : Entity) : Array<Component> {
+    return entities[entity.id];
   }
 
   public function addComponentToEntity(entity : Entity, components) : Void {
@@ -57,6 +67,7 @@ class EntityTable {
 
   }
 
+  // TODO: clean up unused IDs
   private function getAvailableEntityID() : Int {
     var idInfo : {id : Int, lowerBound : Bool} = freeIDs.pop();
     freeIDs.add({id: idInfo.id + 1, lowerBound: false});
