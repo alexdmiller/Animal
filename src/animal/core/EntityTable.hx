@@ -31,6 +31,7 @@ class EntityTable {
    * @param components Components to be added to the new Entity
    * @return The new Entity that is inside the table
    * TODO: events
+   * TODO: update aspects
    **/
   public function createEntity(?components : Array<Component>) : Entity {
     var e : Entity  = new Entity(getAvailableEntityID());
@@ -46,12 +47,17 @@ class EntityTable {
 
   }
 
+  /**
+   * Returns an array of components contained by the passed Entity.
+   * @param entity Entity to look up components for
+   * @return Array of Components contained by the Entity.
+   **/
   public function getComponents(entity : Entity) : Array<Component> {
     return entities[entity.id];
   }
 
-  public function addComponentToEntity(entity : Entity, components) : Void {
-
+  public function addComponentsToEntity(entity : Entity, newComponents : Array<Component>) : Void {
+    entities[entity.id] = entities[entity.id].concat(newComponents);
   }
 
   public function removeComponentFromEntity(entity, components) {

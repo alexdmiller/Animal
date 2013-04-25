@@ -53,4 +53,26 @@ class EntityTableTest extends haxe.unit.TestCase {
     Assert.areNotEqual(c1, testTable.getComponents(e2)[0]);
     Assert.areNotEqual(c2, testTable.getComponents(e1)[0]);
   }
+
+  @Test
+  public function addComponentsToEntity_singleComponent() {
+    var c1 : Component = new DummyComponent();
+    var c2 : Component = new DummyComponent();
+    var e : Entity = testTable.createEntity([c1]);
+    testTable.addComponentsToEntity(e, [c2]);
+    Assert.isTrue(Lambda.has(testTable.getComponents(e), c1));
+    Assert.isTrue(Lambda.has(testTable.getComponents(e), c2));
+  }
+
+    @Test
+  public function addComponentsToEntity_twoComponents() {
+    var c1 : Component = new DummyComponent();
+    var c2 : Component = new DummyComponent();
+    var c3 : Component = new DummyComponent();
+    var e : Entity = testTable.createEntity([c1]);
+    testTable.addComponentsToEntity(e, [c2, c3]);
+    Assert.isTrue(Lambda.has(testTable.getComponents(e), c1));
+    Assert.isTrue(Lambda.has(testTable.getComponents(e), c2));
+    Assert.isTrue(Lambda.has(testTable.getComponents(e), c3));
+  }
 }
