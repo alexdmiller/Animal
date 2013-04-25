@@ -1,5 +1,7 @@
 package animal.core;
 
-public class Entity {
-  
+class Entity {
+  public function new() {
+    
+  }
 }

@@ -4,12 +4,6 @@ import massive.munit.Assert;
 import animal.events.EventEmitter;
 
 class EventEmitterTest extends haxe.unit.TestCase {
-  /*public function test_on_null_throwsError() {
-    var e : EventEmitter = new EventEmitter();
-    e.on('event', null);
-  }
-  */
-
   @Test
   public function singleEvent_listensFor() {
     var e : EventEmitter = new EventEmitter();

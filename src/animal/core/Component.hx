@@ -1,5 +1,5 @@
 package animal.core;
 
-public interface Component {
+interface Component {
   
 }

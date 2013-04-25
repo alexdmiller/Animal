@@ -1,5 +1,5 @@
 package animal.core;
 
-public class Aspect {
+class Aspect {
   
 }

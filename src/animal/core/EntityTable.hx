@@ -1,6 +1,6 @@
 package animal.core;
 
-public class EntityTable {
+class EntityTable {
   /**
    * Maps entity IDs to arrays of components for that entity.
    */
@@ -12,18 +12,19 @@ public class EntityTable {
   private var aspects : Hash<Array<Entity>>;
 
   public function new() {
-    
+    entities = new Hash<Array<Component>>();
+    aspects = new Hash<Array<Entity>>();
   }
 
   public function createEntity() : Entity {
-
+    return null;
   }
 
   public function removeEntity(entity : Entity) : Void {
 
   }
 
-  public function addComponentToEntity(entity : Entity, components) : Void{
+  public function addComponentToEntity(entity : Entity, components) : Void {
 
   }
 
