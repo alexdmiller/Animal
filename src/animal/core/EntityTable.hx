@@ -31,7 +31,6 @@ class EntityTable {
    * @param components Components to be added to the new Entity
    * @return The new Entity that is inside the table
    * TODO: events
-   * TODO: add to table
    **/
   public function createEntity(?components : Array<Component>) : Entity {
     var e : Entity  = new Entity(getAvailableEntityID());
