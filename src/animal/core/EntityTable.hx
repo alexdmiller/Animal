@@ -56,12 +56,38 @@ class EntityTable {
     return entities[entity.id];
   }
 
-  public function addComponentsToEntity(entity : Entity, newComponents : Array<Component>) : Void {
+  /**
+   * Adds the passed components to the passed entity.
+   * @param entity Entity to add Components to
+   * @param newComponents An array of Components to add to Entity
+   * TODO: update aspects
+   * TODO: events?
+   **/
+  public function addComponentsToEntity(entity : Entity,
+      newComponents : Array<Component>) : Void {
     entities[entity.id] = entities[entity.id].concat(newComponents);
   }
 
-  public function removeComponentFromEntity(entity, components) {
+  /**
+   * TODO: update aspects
+   * TODO: should we be able to pass types here, rather than actual components?
+   **/
+  public function removeComponentsFromEntity(entity : Entity,
+      componentsToRemove : Array<Component>) : Void {
+    var components = getComponents(entity);
+    for (c in componentsToRemove) {
+      components.remove(c);
+    }
+  }
 
+  public function hasComponentOfType(entity : Entity,
+      componentType : String) : Bool {
+    return false;
+  }
+
+  public function getComponentOfType(entity : Entity,
+      componentType : String) : Component {
+    return null;
   }
 
   public function registerAspect(aspect) {

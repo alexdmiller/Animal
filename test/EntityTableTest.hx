@@ -64,7 +64,7 @@ class EntityTableTest extends haxe.unit.TestCase {
     Assert.isTrue(Lambda.has(testTable.getComponents(e), c2));
   }
 
-    @Test
+  @Test
   public function addComponentsToEntity_twoComponents() {
     var c1 : Component = new DummyComponent();
     var c2 : Component = new DummyComponent();
@@ -74,5 +74,13 @@ class EntityTableTest extends haxe.unit.TestCase {
     Assert.isTrue(Lambda.has(testTable.getComponents(e), c1));
     Assert.isTrue(Lambda.has(testTable.getComponents(e), c2));
     Assert.isTrue(Lambda.has(testTable.getComponents(e), c3));
+  }
+
+  @Test
+  public function removeComponentsFromEntity_oneComponent() {
+    var c : Component = new DummyComponent();
+    var e : Entity = testTable.createEntity([c]);
+    testTable.removeComponentsFromEntity(e, [c]);
+    Assert.areEqual(testTable.getComponents(e).length, 0);
   }
 }
