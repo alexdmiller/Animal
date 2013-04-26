@@ -86,11 +86,23 @@ class EntityTableTest extends haxe.unit.TestCase {
   }
 
   @Test
-  public function removeComponentsFromEntity_twoComponents() {
-    var c : Component = new DummyComponent();
-    var e : Entity = testTable.createEntity([c]);
-    testTable.removeComponentsFromEntity(e, [c]);
-    Assert.areEqual(0, testTable.getComponents(e).length);
+  public function addTwoComponents_removeOne() {
+    var c1 : Component = new DummyComponent();
+    var c2 : Component = new DummyComponent2();
+    var e : Entity = testTable.createEntity([c1, c2]);
+    testTable.removeComponentsFromEntity(e, [c1]);
+    Assert.isFalse(Lambda.has(testTable.getComponents(e), c1));
+    Assert.isTrue(Lambda.has(testTable.getComponents(e), c2));
+  }
+
+  @Test
+  public function addTwoComponents_removeTwo() {
+    var c1 : Component = new DummyComponent();
+    var c2 : Component = new DummyComponent2();
+    var e : Entity = testTable.createEntity([c1, c2]);
+    testTable.removeComponentsFromEntity(e, [c1, c2]);
+    Assert.isFalse(Lambda.has(testTable.getComponents(e), c1));
+    Assert.isFalse(Lambda.has(testTable.getComponents(e), c2));
   }
 
   @Test
@@ -98,7 +110,28 @@ class EntityTableTest extends haxe.unit.TestCase {
     var c : Component = new DummyComponent();
     var e : Entity = testTable.createEntity([c]);
     testTable.removeComponentsFromEntityByType(e, ['DummyComponent']);
-    Assert.areEqual(0, testTable.getComponents(e).length);
+    Assert.isFalse(Lambda.has(testTable.getComponents(e), c));
+  }
+
+  @Test
+  public function addTwoComponents_removeOneByType() {
+    var c1 : Component = new DummyComponent();
+    var c2 : Component = new DummyComponent2();
+    var e : Entity = testTable.createEntity([c1, c2]);
+    testTable.removeComponentsFromEntityByType(e, ['DummyComponent']);
+    Assert.isFalse(Lambda.has(testTable.getComponents(e), c1));
+    Assert.isTrue(Lambda.has(testTable.getComponents(e), c2));
+  }
+
+    @Test
+  public function addTwoComponents_removeTwoByType() {
+    var c1 : Component = new DummyComponent();
+    var c2 : Component = new DummyComponent2();
+    var e : Entity = testTable.createEntity([c1, c2]);
+    testTable.removeComponentsFromEntityByType(e, ['DummyComponent',
+        'DummyComponent2']);
+    Assert.isFalse(Lambda.has(testTable.getComponents(e), c1));
+    Assert.isFalse(Lambda.has(testTable.getComponents(e), c2));
   }
 
   @Test
