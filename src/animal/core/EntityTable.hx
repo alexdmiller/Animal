@@ -8,6 +8,10 @@ class EntityTable {
    **/
   private var entities : Array<Array<Component>>;
 
+  /**
+   * Stores a list of free IDs. If an element has a 'lowerBound' of true, this
+   * indicates that all integers greater than 'id' are free.
+   **/
   private var freeIDs : FastList<{id : Int, lowerBound : Bool}>;
 
   /**
@@ -77,6 +81,22 @@ class EntityTable {
     var components = getComponents(entity);
     for (c in componentsToRemove) {
       components.remove(c);
+    }
+  }
+
+  /**
+   * TODO: update aspects
+   **/
+  public function removeComponentsFromEntityByType(entity : Entity,
+      componentsToRemove : Array<String>) : Void {
+    var components = getComponents(entity);
+    for (removeClass in componentsToRemove) {
+      for (c in components) {
+        var splitClassName = Type.getClassName(Type.getClass(c)).split('.');
+        if (splitClassName[splitClassName.length - 1] == removeClass) {
+          components.remove(c);
+        }
+      }
     }
   }
 
