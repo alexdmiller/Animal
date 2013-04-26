@@ -39,10 +39,9 @@ class EntityTable {
    **/
   public function createEntity(?components : Array<Component>) : Entity {
     var e : Entity  = new Entity(getAvailableEntityID());
+    entities[e.id] = new Array<Component>();
     if (components != null) {
-      entities[e.id] = components;
-    } else {
-      entities[e.id] = new Array<Component>();
+      addComponentsToEntity(e, components);
     }
     return e;
   }
@@ -69,6 +68,13 @@ class EntityTable {
    **/
   public function addComponentsToEntity(entity : Entity,
       newComponents : Array<Component>) : Void {
+    for (newComponent in newComponents) {
+      for (component in entities[entity.id]) {
+        if (Type.getClass(newComponent) == Type.getClass(component)) {
+          throw EntityTableException.DuplicateComponentType;
+        }
+      }
+    }
     entities[entity.id] = entities[entity.id].concat(newComponents);
   }
 
@@ -124,4 +130,8 @@ class EntityTable {
     freeIDs.add({id: idInfo.id + 1, lowerBound: false});
     return idInfo.id;
   }
+}
+
+enum EntityTableException {
+  DuplicateComponentType;
 }

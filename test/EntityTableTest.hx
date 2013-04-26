@@ -123,7 +123,7 @@ class EntityTableTest extends haxe.unit.TestCase {
     Assert.isTrue(Lambda.has(testTable.getComponents(e), c2));
   }
 
-    @Test
+  @Test
   public function addTwoComponents_removeTwoByType() {
     var c1 : Component = new DummyComponent();
     var c2 : Component = new DummyComponent2();
@@ -140,5 +140,18 @@ class EntityTableTest extends haxe.unit.TestCase {
     var e : Entity = testTable.createEntity([c]);
     testTable.removeComponentsFromEntityByType(e, ['DummyComponent2']);
     Assert.areEqual(0, testTable.getComponents(e).length);
+  }
+
+  @Test
+  public function addingTwoComponentsSameType_throwsException() {
+    var c1 : Component = new DummyComponent();
+    var c2 : Component = new DummyComponent();
+    var e : Entity = testTable.createEntity([c1]);
+    try {
+      testTable.addComponentsToEntity(e, [c2]);
+    } catch (e : EntityTableException) {
+      return;
+    }
+    Assert.fail("Adding two components of the same type to an entity should throw an exception.");
   }
 }
