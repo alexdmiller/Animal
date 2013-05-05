@@ -1,6 +1,8 @@
 package animal.core;
 
-class GameBoard {
+import animal.events;
+
+class GameBoard extends EventEmitter {
   private var entities : Array<Entity>;
   private var systems : Array<System>
 
@@ -17,6 +19,10 @@ class GameBoard {
   }
 
   public function removeSystem(system : System) : Void {
+
+  }
+
+  private function onEntityChanged(event : Dynamic) : Void {
 
   }
 }
