@@ -6,7 +6,7 @@ class EntityTable {
   /**
    * Maps entity IDs to arrays of components for that entity.
    **/
-  private var entities : Array<Array<Component>>;
+  private var entities : Array<Entity>;
 
   /**
    * Stores a list of free IDs. If an element has a 'lowerBound' of true, this
@@ -15,16 +15,10 @@ class EntityTable {
   private var freeIDs : FastList<{id : Int, lowerBound : Bool}>;
 
   /**
-   * Maps aspects (groups of components) to entities that have those components.
-   **/
-  private var aspects : Hash<Array<Entity>>;
-
-  /**
    * Initially there are no entities, components or aspects stored in the table.
    */
   public function new() {
     entities = new Array<Array<Component>>();
-    aspects = new Hash<Array<Entity>>();
     freeIDs = new FastList<{id : Int, lowerBound : Bool}>();
     freeIDs.add({id: 0, lowerBound: false});
   }
@@ -39,7 +33,7 @@ class EntityTable {
    **/
   public function createEntity(?components : Array<Component>) : Entity {
     var e : Entity  = new Entity(getAvailableEntityID());
-    entities[e.id] = new Array<Component>();
+    entities[e.id] = e;
     if (components != null) {
       addComponentsToEntity(e, components);
     }
@@ -79,6 +73,10 @@ class EntityTable {
   }
 
   /**
+   * Removes the passed components from the passed entity.
+   * @param entity The entity to remove components from.
+   * @param componentsToRemove An array of component objects to remove.
+   * TODO: event
    * TODO: update aspects
    * TODO: should we be able to pass types here, rather than actual components?
    **/
@@ -91,6 +89,7 @@ class EntityTable {
   }
 
   /**
+   * TODO: event
    * TODO: update aspects
    **/
   public function removeComponentsFromEntityByType(entity : Entity,
