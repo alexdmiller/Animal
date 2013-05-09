@@ -2,6 +2,7 @@ import massive.munit.TestSuite;
 
 import EntityTest;
 import EventEmitterTest;
+import SystemGameBoardIntegrationTest;
 import SystemTest;
 
 /**
@@ -18,6 +19,7 @@ class TestSuite extends massive.munit.TestSuite
 
 		add(EntityTest);
 		add(EventEmitterTest);
+		add(SystemGameBoardIntegrationTest);
 		add(SystemTest);
 	}
 }

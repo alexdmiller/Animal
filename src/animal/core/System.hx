@@ -6,12 +6,12 @@ import haxe.FastList;
 class System extends EventEmitter {
   public var board(default, setBoard) : GameBoard;
   private var interest : Array<String>;
-  private var entities : FastList<Entity>;
+  private var entities : List<Entity>;
 
   public function new(interest : Array<String>) {
     super();
     this.interest = interest;
-    this.entities = new FastList<Entity>();
+    this.entities = new List<Entity>();
   }
 
   private function setBoard(board : GameBoard) : GameBoard {
@@ -20,6 +20,7 @@ class System extends EventEmitter {
     }
     this.board = board;
     for (entity in board) {
+      trace("hello");
       if (isInteresed(entity)) {
         entities.add(entity);
       }
@@ -55,6 +56,10 @@ class System extends EventEmitter {
       }
     }
     return true;
+  }
+
+  public function containsEntity(e : Entity) : Bool {
+    return Lambda.exists(entities, function(x) { return e == x; });
   }
 
   // delta? final?
