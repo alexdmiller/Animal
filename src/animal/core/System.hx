@@ -1,28 +1,60 @@
 package animal.core;
 
+import animal.events.EventEmitter;
 import haxe.FastList;
 
-class System {
-  public var board(default, default) : GameBoard;
-  private var interest : Array<Component>;
+class System extends EventEmitter {
+  public var board(default, setBoard) : GameBoard;
+  private var interest : Array<String>;
   private var entities : FastList<Entity>;
 
-
-  public function new(interest : Array<Class>) {
+  public function new(interest : Array<String>) {
+    super();
     this.interest = interest;
     this.entities = new FastList<Entity>();
   }
 
+  private function setBoard(board : GameBoard) : GameBoard {
+    if (this.board != null) {
+      throw "GameBoard has already been assigned for the system.";
+    }
+    this.board = board;
+    for (entity in board) {
+      if (isInteresed(entity)) {
+        entities.add(entity);
+      }
+    }
+    board.on('entity_added', onEntityAddedToBoard);
+    board.on('entity_removed', onEntityRemovedFromBoard);
+    dispatch('board_set', { board: board });
+    return board;
+  }
+
+  private function onEntityAddedToBoard(event : Dynamic) : Void {
+    if (isInteresed(event.entity)) {
+      entities.add(event.entity);
+    }
+  }
+
+  private function onEntityRemovedFromBoard(event : Dynamic) : Void {
+    entities.remove(event.entity);
+  }
+
+  private function onEntityChanged(event : Dynamic) : Void {
+    if (isInteresed(event.entity)) {
+      entities.add(event.entity);
+    } else {
+      entities.remove(event.entity);
+    }
+  }
+    
   public function isInteresed(e : Entity) : Bool {
-
-  }
-
-  public function insert(e : Entity) : Void {
-
-  }
-
-  public function remove(e : Entity) : Void {
-
+    for (componentName in interest) {
+      if (!e.hasComponentWithName(componentName)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   // delta? final?
@@ -32,16 +64,4 @@ class System {
 
   // abstract?
   public function process(e : Entity) : Void {}
-
-  private function onEntityAddedToBoard(event : Dynamic) : Void {
-
-  }
-
-  private function onEntityRemovedFromBoard(event : Dynamic) : Void {
-    
-  }
-
-  private function onEntityChanged(event : Dynamic) : Void {
-    
-  }
 }

@@ -1,13 +1,22 @@
 package animal.core;
 
-import animal.events;
+import haxe.FastList;
+
+import animal.events.EventEmitter;
+import animal.core.Component;
 
 class GameBoard extends EventEmitter {
-  private var entities : Array<Entity>;
-  private var systems : Array<System>
+  private var entities : FastList<Entity>;
+  private var systems : Array<System>;
 
-  public function createEntity(components) : Void {
+  public function createEntity(components : Array<Component>) : Void {
+    var entity = new Entity();
+    entities.add(entity);
+    dispatch('entity_added', { entity: entity });
+  }
 
+  public function iterator() : Iterator<Entity> {
+    return entities.iterator();
   }
 
   public function removeEntity() : Void {

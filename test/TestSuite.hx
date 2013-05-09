@@ -2,6 +2,7 @@ import massive.munit.TestSuite;
 
 import EntityTest;
 import EventEmitterTest;
+import SystemTest;
 
 /**
  * Auto generated Test Suite for MassiveUnit.
@@ -17,5 +18,6 @@ class TestSuite extends massive.munit.TestSuite
 
 		add(EntityTest);
 		add(EventEmitterTest);
+		add(SystemTest);
 	}
 }

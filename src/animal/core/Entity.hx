@@ -6,7 +6,7 @@ class Entity extends EventEmitter {
   public var id(default, null) : Int;
   private var components : Hash<Component>;
 
-  public function new(id : Int) {
+  public function new(?id : Int = null) {
     super();
     this.id = id;
     this.components = new Hash<Component>();
