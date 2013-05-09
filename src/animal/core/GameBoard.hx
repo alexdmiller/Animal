@@ -17,6 +17,9 @@ class GameBoard extends EventEmitter {
 
   public function createEntity(components : Array<Component>) : Entity {
     var entity = new Entity();
+    for (c in components) {
+      entity.addComponent(c);
+    }
     entities.add(entity);
     dispatch('entity_added', { entity: entity });
     return entity;
