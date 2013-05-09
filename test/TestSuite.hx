@@ -1,6 +1,6 @@
 import massive.munit.TestSuite;
 
-import EntityTableTest;
+import EntityTest;
 import EventEmitterTest;
 
 /**
@@ -15,7 +15,7 @@ class TestSuite extends massive.munit.TestSuite
 	{
 		super();
 
-		add(EntityTableTest);
+		add(EntityTest);
 		add(EventEmitterTest);
 	}
 }
