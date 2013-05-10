@@ -23,6 +23,19 @@ class SystemGameBoardIntegrationTest extends haxe.unit.TestCase {
   @Test
   public function system_adds_entity_when_added_to_board() {
     board.addSystem(system);
-    Assert.areEqual(1, system.getEntities().length);
+    Assert.isTrue(system.containsEntity(goodEntity));
+  }
+
+  @Test
+  public function system_does_not_add_entity_when_added_to_board() {
+    board.addSystem(system);
+    Assert.isFalse(system.containsEntity(badEntity));
+  }
+
+  @Test
+  public function system_removes_entity_removed_from_board() {
+    board.addSystem(system);
+    board.removeEntity(goodEntity);
+    Assert.isFalse(system.containsEntity(goodEntity));
   }
 }

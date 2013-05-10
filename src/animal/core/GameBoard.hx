@@ -25,12 +25,13 @@ class GameBoard extends EventEmitter {
     return entity;
   }
 
-  public function iterator() : Iterator<Entity> {
-    return entities.iterator();
+  public function removeEntity(entity : Entity) : Void {
+    entities.remove(entity);
+    dispatch('entity_removed', { entity: entity });
   }
 
-  public function removeEntity() : Void {
-
+  public function iterator() : Iterator<Entity> {
+    return entities.iterator();
   }
 
   public function addSystem(system : System) : Void {
