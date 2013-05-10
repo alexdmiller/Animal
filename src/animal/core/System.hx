@@ -28,6 +28,8 @@ class System extends EventEmitter {
     }
     board.on('entity_added', onEntityAddedToBoard);
     board.on('entity_removed', onEntityRemovedFromBoard);
+    board.on('component_added_to_entity', onEntityComponentsChanged);
+    board.on('component_removed_from_entity', onEntityComponentsChanged);
     dispatch('board_set', { board: board });
     return board;
   }
@@ -42,7 +44,7 @@ class System extends EventEmitter {
     entities.remove(event.entity);
   }
 
-  private function onEntityChanged(event : Dynamic) : Void {
+  private function onEntityComponentsChanged(event : Dynamic) : Void {
     if (isInteresed(event.entity)) {
       entities.add(event.entity);
     } else {

@@ -21,12 +21,24 @@ class GameBoard extends EventEmitter {
       entity.addComponent(c);
     }
     entities.add(entity);
+    entity.on('component_added', onComponentAddedToEntity);
+    entity.on('component_removed', onComponentRemovedFromEntity);
     dispatch('entity_added', { entity: entity });
     return entity;
   }
 
+  private function onComponentAddedToEntity(e : Dynamic) : Void {
+    dispatch('component_added_to_entity', { entity: e.dispatcher, component: e.component });
+  }
+
+  private function onComponentRemovedFromEntity(e : Dynamic) : Void {
+    dispatch('component_removed_from_entity', { entity: e.dispatcher, component: e.component });
+  }
+
   public function removeEntity(entity : Entity) : Void {
     entities.remove(entity);
+    entity.off('component_added', onComponentAddedToEntity);
+    entity.off('component_removed', onComponentRemovedFromEntity);
     dispatch('entity_removed', { entity: entity });
   }
 
