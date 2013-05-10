@@ -45,4 +45,11 @@ class SystemGameBoardIntegrationTest extends haxe.unit.TestCase {
     badEntity.addComponent(new dummypackage.DummyComponent3());
     Assert.isTrue(system.containsEntity(badEntity));
   }
+
+  @Test
+  public function system_remove_entity_that_changed_components() {
+    board.addSystem(system);
+    goodEntity.removeComponentWithName('DummyComponent');
+    Assert.isFalse(system.containsEntity(goodEntity));
+  }
 }

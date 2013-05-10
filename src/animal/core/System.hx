@@ -20,9 +20,7 @@ class System extends EventEmitter {
     }
     this.board = board;
     for (entity in board) {
-      trace("entity: " + entity);
       if (isInteresed(entity)) {
-        trace("interested");
         entities.add(entity);
       }
     }
