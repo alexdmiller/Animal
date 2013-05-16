@@ -15,50 +15,42 @@ class EventEmitterTest extends haxe.unit.TestCase {
   @Test
   public function singleEvent_on_dispatch() {
     var e : EventEmitter = new EventEmitter();
-    var value : Int = 0;
     var responseFunction = function(event) {
-      value = 1;
+      Assert.isTrue(true);
     };
     e.on('event', responseFunction);
     e.dispatch('event');
-    Assert.areEqual(value, 1);
   }
 
   @Test
   public function singleEvent_off_dispatch() {
     var e : EventEmitter = new EventEmitter();
-    var value : Int = 0;
     var responseFunction = function(event) {
-      value = 1;
+      Assert.isTrue(true);
     };
     e.off('event', responseFunction);
     e.dispatch('event');
-    Assert.areEqual(value, 0);
   }
 
   @Test
   public function singleEvent_on_off_dispatch() {
     var e : EventEmitter = new EventEmitter();
-    var value : Int = 0;
     var responseFunction = function(event) {
-      value = 1;
+      Assert.isTrue(true);
     };
     e.on('event', responseFunction);
     e.off('event', responseFunction);
     e.dispatch('event');
-    Assert.areEqual(value, 0);
   }
 
   @Test
   public function singleEvent_on_allOff_dispatch() {
     var e : EventEmitter = new EventEmitter();
-    var value : Int = 0;
     var responseFunction = function(event) {
-      value = 1;
+      Assert.isTrue(true);
     };
     e.on('event', responseFunction);
     e.allOff('event');
     e.dispatch('event');
-    Assert.areEqual(value, 0);
   }
 }
