@@ -52,4 +52,13 @@ class SystemGameBoardIntegrationTest extends haxe.unit.TestCase {
     goodEntity.removeComponentWithName('DummyComponent');
     Assert.isFalse(system.containsEntity(goodEntity));
   }
+
+  @Test
+  public function system_receives_board_update() {
+    board.addSystem(system);
+    system.on('updated', function(event : Dynamic) {
+      Assert.isTrue(true);
+    });
+    board.update(1);
+  }
 }

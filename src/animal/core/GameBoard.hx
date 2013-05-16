@@ -52,7 +52,12 @@ class GameBoard extends EventEmitter {
     dispatch('system_added', { system: system });
   }
 
+  // TODO
   public function removeSystem(system : System) : Void {
 
+  }
+
+  public function update(delta : Int) : Void {
+    dispatch('updated', { delta: delta });
   }
 }

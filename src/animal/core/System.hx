@@ -62,12 +62,4 @@ class System extends EventEmitter {
   public function containsEntity(e : Entity) : Bool {
     return Lambda.exists(entities, function(x) { return e == x; });
   }
-
-  // delta? final?
-  public function update() : Void {
-
-  }
-
-  // abstract?
-  public function process(e : Entity) : Void {}
 }
