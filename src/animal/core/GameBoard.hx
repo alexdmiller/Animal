@@ -55,8 +55,4 @@ class GameBoard extends EventEmitter {
   public function removeSystem(system : System) : Void {
 
   }
-
-  private function onEntityChanged(event : Dynamic) : Void {
-
-  }
 }
