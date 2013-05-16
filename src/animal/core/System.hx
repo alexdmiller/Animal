@@ -14,6 +14,20 @@ class System extends EventEmitter {
     this.entities = new List<Entity>();
   }
 
+    
+  public function isInteresed(e : Entity) : Bool {
+    for (componentName in interest) {
+      if (!e.hasComponentWithName(componentName)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public function containsEntity(e : Entity) : Bool {
+    return Lambda.exists(entities, function(x) { return e == x; });
+  }
+
   private function setBoard(board : GameBoard) : GameBoard {
     if (this.board != null) {
       throw "GameBoard has already been assigned for the system.";
@@ -28,6 +42,7 @@ class System extends EventEmitter {
     board.on('entity_removed', onEntityRemovedFromBoard);
     board.on('component_added_to_entity', onEntityComponentsChanged);
     board.on('component_removed_from_entity', onEntityComponentsChanged);
+    board.on('removed_from_board', onSystemRemovedFromBoard);
     dispatch('board_set', { board: board });
     return board;
   }
@@ -49,17 +64,12 @@ class System extends EventEmitter {
       entities.remove(event.entity);
     }
   }
-    
-  public function isInteresed(e : Entity) : Bool {
-    for (componentName in interest) {
-      if (!e.hasComponentWithName(componentName)) {
-        return false;
-      }
-    }
-    return true;
-  }
 
-  public function containsEntity(e : Entity) : Bool {
-    return Lambda.exists(entities, function(x) { return e == x; });
+  private function onSystemRemovedFromBoard(event : Dynamic) : Void {
+    board.off('entity_added', onEntityAddedToBoard);
+    board.off('entity_removed', onEntityRemovedFromBoard);
+    board.off('component_added_to_entity', onEntityComponentsChanged);
+    board.off('component_removed_from_entity', onEntityComponentsChanged);
+    board.off('removed_from_board', onSystemRemovedFromBoard);
   }
 }

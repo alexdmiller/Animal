@@ -61,4 +61,13 @@ class SystemGameBoardIntegrationTest extends haxe.unit.TestCase {
     });
     board.update(1);
   }
+
+  @Test
+  public function system_removed_from_board_throws_event() {
+    board.addSystem(system);
+    system.on('removed_from_board', function(event : Dynamic) {
+      Assert.isTrue(true);
+    });
+    board.removeSystem(system);
+  }
 }
