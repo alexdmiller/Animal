@@ -70,4 +70,9 @@ class SystemGameBoardIntegrationTest extends haxe.unit.TestCase {
     });
     board.removeSystem(system);
   }
+
+  @Test
+  public function entity_with_id_can_be_retrieved() {
+    board.createEntity([], 'my_id');
+  }
 }
