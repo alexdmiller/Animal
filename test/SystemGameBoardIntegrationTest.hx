@@ -57,7 +57,7 @@ class SystemGameBoardIntegrationTest extends haxe.unit.TestCase {
   public function system_receives_board_update() {
     board.addSystem(system);
     system.on('updated', function(event : Dynamic) {
-      Assert.isTrue(true);
+      Assert.areEqual(1, event.delta);
     });
     board.update(1);
   }
