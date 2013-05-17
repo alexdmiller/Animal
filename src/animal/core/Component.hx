@@ -1,5 +1,7 @@
 package animal.core;
 
-interface Component {
-  
+class Component {
+  public function new(?options : Dynamic = null) {
+    
+  }
 }
