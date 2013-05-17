@@ -19,13 +19,16 @@ class GameBoard extends EventEmitter {
 
   public function createEntity(components : Array<Component>, ?id : String = null) : Entity {
     var entity = new Entity(id);
+    if (id != null) {
+      if (idToEntities.exists(id)) {
+        throw "Cannot create Entity with id " + id + " because the GameBoard already has an Entity with that id.";
+      }
+      idToEntities.set(id, entity);
+    }
     for (c in components) {
       entity.addComponent(c);
     }
     entities.add(entity);
-    if (id != null) {
-      idToEntities.set(id, entity);
-    }
     entity.on('component_added', onComponentAddedToEntity);
     entity.on('component_removed', onComponentRemovedFromEntity);
     dispatch('entity_added', { entity: entity });
@@ -40,6 +43,12 @@ class GameBoard extends EventEmitter {
     entity.off('component_added', onComponentAddedToEntity);
     entity.off('component_removed', onComponentRemovedFromEntity);
     dispatch('entity_removed', { entity: entity });
+  }
+
+  public function removeEntityWithId(id : String) : Void {
+    if (getEntityById(id) != null) {
+      removeEntity(getEntityById(id));
+    }
   }
 
   public function getEntityById(id : String) : Entity {

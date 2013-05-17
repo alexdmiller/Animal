@@ -73,6 +73,26 @@ class SystemGameBoardIntegrationTest extends haxe.unit.TestCase {
 
   @Test
   public function entity_with_id_can_be_retrieved() {
-    board.createEntity([new DummyComponent()], 'my_id');
+    var e : Entity = board.createEntity([new DummyComponent()], 'my_id');
+    Assert.areEqual(e, board.getEntityById('my_id'));
+  }
+
+  @Test
+  public function cannot_add_id_twice() {
+    var e1 : Entity = board.createEntity([new DummyComponent()], 'my_id');
+    try {
+      var e2 : Entity = board.createEntity([new DummyComponent()], 'my_id');
+    } catch(e : Dynamic) {
+      Assert.isTrue(true);
+      return;
+    }
+    Assert.fail("Adding id twice to GameBoard should throw exception.");
+  }
+
+  @Test
+  public function removing_entity_with_id() {
+    var e : Entity = board.createEntity([new DummyComponent()], 'my_id');
+    board.removeEntityWithId('my_id');
+    Assert.isNull(board.getEntityById('my_id'));
   }
 }
