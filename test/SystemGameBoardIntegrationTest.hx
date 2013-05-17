@@ -73,6 +73,6 @@ class SystemGameBoardIntegrationTest extends haxe.unit.TestCase {
 
   @Test
   public function entity_with_id_can_be_retrieved() {
-    board.createEntity([], 'my_id');
+    board.createEntity([new DummyComponent()], 'my_id');
   }
 }

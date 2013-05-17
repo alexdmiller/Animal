@@ -8,13 +8,13 @@ class EntityTest extends haxe.unit.TestCase {
 
   @Before
   override public function setup() : Void {
-    e = new Entity(1);
+    e = new Entity("my_id");
   }
 
   @Test
   public function constructed_entity_has_ID() {
-    var e2 : Entity = new Entity(1);
-    Assert.areEqual(1, e2.id);
+    var e2 : Entity = new Entity("my_id");
+    Assert.areEqual("my_id", e2.id);
   }
 
   @Test
