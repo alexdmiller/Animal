@@ -1,3 +1,4 @@
 -main SpaceshipMain
 -cp src
+-cp ../../src
 -swf bin/spaceship.swf

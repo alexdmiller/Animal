@@ -43,6 +43,7 @@ class System extends EventEmitter {
     board.on('component_added_to_entity', onEntityComponentsChanged);
     board.on('component_removed_from_entity', onEntityComponentsChanged);
     board.on('removed_from_board', onSystemRemovedFromBoard);
+    board.on('updated', onBoardUpdated);
     dispatch('board_set', { board: board });
     return board;
   }
@@ -51,17 +52,21 @@ class System extends EventEmitter {
     if (isInteresed(event.entity)) {
       entities.add(event.entity);
     }
+    added(event.entity);
   }
 
   private function onEntityRemovedFromBoard(event : Dynamic) : Void {
     entities.remove(event.entity);
+    removed(event.entity);
   }
 
   private function onEntityComponentsChanged(event : Dynamic) : Void {
     if (isInteresed(event.entity)) {
       entities.add(event.entity);
+      added(event.entity);
     } else {
       entities.remove(event.entity);
+      removed(event.entity);
     }
   }
 
@@ -72,4 +77,12 @@ class System extends EventEmitter {
     board.off('component_removed_from_entity', onEntityComponentsChanged);
     board.off('removed_from_board', onSystemRemovedFromBoard);
   }
+
+  private function onBoardUpdated(event : Dynamic) : Void {
+    update(event.delta);
+  }
+
+  private function added(e : Entity) : Void {}
+  private function removed(e : Entity) : Void {}
+  private function update(delta : Int) : Void {}
 }
