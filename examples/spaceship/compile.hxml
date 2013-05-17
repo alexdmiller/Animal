@@ -1,0 +1,3 @@
+-main SpaceshipMain
+-cp src
+-swf bin/spaceship.swf
