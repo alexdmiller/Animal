@@ -8,7 +8,10 @@ class ComponentType {
   public static function decode(serialized : String) : Component {
     var jsonObject : Dynamic = Json.parse(serialized);
     var className : String = jsonObject.type;
-    var component : Component = Type.createInstance(Type.resolveClass(className), [jsonObject]);
+    var component : Component = Type.createInstance(Type.resolveClass(className), []);
+    for (field in Reflect.fields(jsonObject.data)) {
+      Reflect.setField(component, field, Reflect.field(jsonObject.data, field));
+    }
     return component;
   }
 

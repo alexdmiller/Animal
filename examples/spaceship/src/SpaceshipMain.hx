@@ -17,7 +17,7 @@ class SpaceshipMain {
     board.addSystem(new PhysicsSystem());
 
     var e : Entity = board.createEntity([
-      ComponentType.decode('{"type": "components.Position", "x": 10, "y": 100}')
+      ComponentType.decode('{"type": "components.Position", "data": {"x": 10, "y": 100}}')
     ]);
 
     flash.Lib.current.addEventListener(Event.ENTER_FRAME, onEnterFrame);
