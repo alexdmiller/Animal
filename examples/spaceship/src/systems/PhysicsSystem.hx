@@ -5,6 +5,7 @@ import animal.core.Entity;
 import animal.core.Entity.ComponentRetriever;
 
 import components.Position;
+import components.Velocity;
 
 class PhysicsSystem extends System {
   public function new() {
@@ -12,10 +13,10 @@ class PhysicsSystem extends System {
   }
 
   override public function update(delta : Int) : Void {
-    var r : ComponentRetriever<components.Position> = new ComponentRetriever<components.Position>('components.Position');
     for (e in entities) {
-      var position : Position = r.get(e);
-      trace(position.x);
+      var position : Position = Position.ret.get(e);
+      var velocity : Velocity = Velocity.ret.get(e);
+      position.add(velocity);
     }
   }
 }

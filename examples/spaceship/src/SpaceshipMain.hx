@@ -7,7 +7,6 @@ import animal.core.Entity;
 import animal.serialization.ComponentType;
 
 import systems.PhysicsSystem;
-import components.Position;
 
 class SpaceshipMain {
   private static var board : GameBoard;
@@ -17,7 +16,8 @@ class SpaceshipMain {
     board.addSystem(new PhysicsSystem());
 
     var e : Entity = board.createEntity([
-      ComponentType.decode('{"type": "components.Position", "data": {"x": 10, "y": 100}}')
+      ComponentType.decode('{"type": "components.Position", "data": {"x": 10, "y": 100}}'),
+      ComponentType.decode('{"type": "components.Velocity", "data": {"x": 1, "y": 0.5}}')
     ]);
 
     flash.Lib.current.addEventListener(Event.ENTER_FRAME, onEnterFrame);
