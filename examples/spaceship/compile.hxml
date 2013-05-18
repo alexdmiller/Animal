@@ -2,3 +2,4 @@
 -cp examples/spaceship/src
 -cp src
 -swf examples/spaceship/bin/spaceship.swf
+-swf-header 600:600:60

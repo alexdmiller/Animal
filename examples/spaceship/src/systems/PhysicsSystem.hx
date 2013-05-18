@@ -9,7 +9,7 @@ import components.Velocity;
 
 class PhysicsSystem extends System {
   public function new() {
-    super(['components.Position']);
+    super(['components.Position', 'components.Velocity']);
   }
 
   override public function update(delta : Int) : Void {
