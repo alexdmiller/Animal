@@ -3,8 +3,8 @@ package;
 import flash.events.Event;
 
 import animal.core.GameBoard;
-import animal.core.ComponentFactory;
 import animal.core.Entity;
+import animal.serialization.ComponentType;
 
 import systems.PhysicsSystem;
 import components.Position;
@@ -16,14 +16,8 @@ class SpaceshipMain {
     board = new GameBoard();
     board.addSystem(new PhysicsSystem());
 
-    var componentDefinition : Dynamic = {
-      type: 'components.Position',
-      x: 10,
-      y: 100
-    };
-
     var e : Entity = board.createEntity([
-      ComponentFactory.makeComponent(componentDefinition)
+      ComponentType.decode('{"type": "components.Position", "x": 10, "y": 100}')
     ]);
 
     flash.Lib.current.addEventListener(Event.ENTER_FRAME, onEnterFrame);
