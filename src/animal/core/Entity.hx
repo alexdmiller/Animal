@@ -24,11 +24,11 @@ class Entity extends EventEmitter {
     });
   }
 
-  public function hasComponentWithName(componentName : String) {
+  public function hasComponentWithName(componentName : String) : Bool {
     return components.exists(componentName);
   }
 
-  public function getComponentWithName(componentName : String) {
+  public function getComponentWithName(componentName : String) : Component {
     return components.get(componentName);
   }
 
@@ -38,7 +38,7 @@ class Entity extends EventEmitter {
     removeComponentWithName(key);
   }
 
-  public function removeComponentWithName(componentName : String) {
+  public function removeComponentWithName(componentName : String) : Void {
     if (components.exists(componentName)) {
       var c : Component = components.get(componentName);
       components.remove(componentName);
@@ -46,5 +46,17 @@ class Entity extends EventEmitter {
         component: c
       });
     }
+  }
+}
+
+class ComponentRetriever<T> {
+  private var name : String;
+
+  public function new(name : String) {
+    this.name = name;
+  }
+
+  public function get(entity : Entity) : T {
+    return cast entity.getComponentWithName(name);
   }
 }
