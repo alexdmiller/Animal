@@ -23,7 +23,7 @@ class SpaceshipMain {
     var e : Entity = board.createEntity([
       ComponentType.decode('{"type": "components.Position", "data": {"x": 10, "y": 100}}'),
       ComponentType.decode('{"type": "components.Velocity", "data": {"x": 1, "y": 0.5}}'),
-      ComponentType.decode('{"type": "components.View", "data": {"type": "circle"}}')
+      ComponentType.decode('{"type": "components.View", "data": {"type": "ship"}}')
     ]);
 
     flash.Lib.current.addEventListener(Event.ENTER_FRAME, onEnterFrame);

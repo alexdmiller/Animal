@@ -17,6 +17,7 @@ class PhysicsSystem extends System {
       var position : Position = Position.ret.get(e);
       var velocity : Velocity = Velocity.ret.get(e);
       position.add(velocity);
+      e.dispatch('position_changed', { position: position });
     }
   }
 }
