@@ -4,17 +4,20 @@ import haxe.FastList;
 
 import animal.events.EventEmitter;
 import animal.core.Component;
+import animal.util.IDPool;
 
 class GameBoard extends EventEmitter {
   private var entities : FastList<Entity>;
   private var idToEntities : Hash<Entity>;
   private var systems : List<System>;
+  private var idPool : IDPool;
 
   public function new() {
     super();
     entities = new FastList<Entity>();
+    idToEntities = new Hash<Entity>();    
     systems = new List<System>();
-    idToEntities = new Hash<Entity>();
+    idPool = new IDPool();
   }
 
   public function createEntity(components : Array<Component>, ?id : String = null) : Entity {
