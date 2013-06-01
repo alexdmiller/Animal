@@ -4,7 +4,6 @@ import flash.display.Sprite;
 
 import animal.core.System;
 import animal.core.Entity;
-import animal.core.Entity.ComponentRetriever;
 
 import components.View;
 import components.Position;

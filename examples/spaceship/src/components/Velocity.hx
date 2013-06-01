@@ -1,6 +1,6 @@
 package components;
 
-import animal.core.Entity;
+import animal.core.Component;
 
 class Velocity extends Vector {
   public static var ret : ComponentRetriever<Velocity> =

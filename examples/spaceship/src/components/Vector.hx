@@ -15,4 +15,9 @@ class Vector implements Component {
     this.x += other.x;
     this.y += other.y;
   }
+
+  public function scale(scalar : Float) : Void {
+    this.x *= scalar;
+    this.y *= scalar;
+  }
 }

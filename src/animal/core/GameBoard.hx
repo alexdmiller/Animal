@@ -17,7 +17,7 @@ class GameBoard extends EventEmitter {
     entities = new FastList<Entity>();
     idToEntities = new Hash<Entity>();    
     systems = new List<System>();
-    idPool = new IDPool();
+    //idPool = new IDPool();
   }
 
   public function createEntity(components : Array<Component>, ?id : String = null) : Entity {

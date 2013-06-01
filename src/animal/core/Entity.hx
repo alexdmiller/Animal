@@ -16,7 +16,8 @@ class Entity extends EventEmitter {
   public function addComponent(c : Component) : Void {
     var key : String = Type.getClassName(Type.getClass(c));
     if (hasComponentWithName(key)) {
-      throw "Cannot add component of type " + key + " because entity already has a component of this type.";
+      throw "Cannot add component of type " + key
+          + " because entity already has a component of this type.";
     }
     components.set(key, c);
     dispatch('component_added', {
@@ -46,17 +47,5 @@ class Entity extends EventEmitter {
         component: c
       });
     }
-  }
-}
-
-class ComponentRetriever<T> {
-  private var name : String;
-
-  public function new(name : String) {
-    this.name = name;
-  }
-
-  public function get(entity : Entity) : T {
-    return cast entity.getComponentWithName(name);
   }
 }
