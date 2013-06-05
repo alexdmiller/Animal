@@ -8,6 +8,7 @@ import animal.core.Entity;
 import components.View;
 import components.Position;
 import view.SpaceshipView;
+import view.BulletView;
 
 class RenderSystem extends System {
   public var canvas(default, null) : Sprite;
@@ -25,6 +26,8 @@ class RenderSystem extends System {
     switch (viewDef.type) {
       case "ship":
         sprite = new SpaceshipView(e);
+      case "bullet":
+        sprite = new BulletView(e);
       case "none":
     }
     if (sprite != null) {

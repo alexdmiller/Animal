@@ -9,6 +9,7 @@ import animal.serialization.ComponentType;
 
 import components.Shooter;
 import components.Position;
+import components.Bullet;
 
 class ShootingSystem extends System {
   public function new(stage : DisplayObject) {
@@ -24,8 +25,12 @@ class ShootingSystem extends System {
           type: 'components.Bullet'
         }),
         ComponentType.decodeJSON({
+          type: 'components.View',
+          data: { type: 'bullet' }
+        }),
+        ComponentType.decodeJSON({
           type: 'components.Position',
-          data: {x: position.x, y: position.y }
+          data: { x: position.x, y: position.y }
         })
       ]);  
     }
