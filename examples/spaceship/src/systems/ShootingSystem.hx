@@ -5,7 +5,7 @@ import flash.events.MouseEvent;
 
 import animal.core.System;
 import animal.core.Entity;
-import animal.serialization.ComponentType;
+import animal.serialization.ComponentSerialize;
 
 import components.Shooter;
 import components.Position;
@@ -20,21 +20,26 @@ class ShootingSystem extends System {
   private function onMouseDown(event : MouseEvent) : Void {
     for (e in entities) {
       var position : Position = Position.ret.get(e);
+      var dx : Float = event.stageX - position.x;
+      var dy : Float = event.stageY - position.y;
+      var angle : Float = Math.atan2(dy, dx);
+      var fx : Float = Math.cos(angle) * 8;
+      var fy : Float = Math.sin(angle) * 8;
       var bullet = board.createEntity([
-        ComponentType.decodeJSON({
+        ComponentSerialize.decodeJSON({
           type: 'components.Bullet'
         }),
-        ComponentType.decodeJSON({
+        ComponentSerialize.decodeJSON({
           type: 'components.View',
           data: { type: 'bullet' }
         }),
-        ComponentType.decodeJSON({
+        ComponentSerialize.decodeJSON({
           type: 'components.Position',
           data: { x: position.x, y: position.y }
         }),
-        ComponentType.decodeJSON({
+        ComponentSerialize.decodeJSON({
           type: 'components.Velocity',
-          data: { x: 2, y: 2 }
+          data: { x: fx, y: fy }
         })
       ]);  
     }

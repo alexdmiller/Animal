@@ -4,7 +4,7 @@ import animal.core.Component;
 
 import haxe.Json;
 
-class ComponentType {
+class ComponentSerialize {
   public static function decodeJSON(jsonObject : Dynamic) : Component {
     var className : String = jsonObject.type;
     var component : Component = Type.createInstance(Type.resolveClass(className), []);

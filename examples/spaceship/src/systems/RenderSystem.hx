@@ -20,7 +20,7 @@ class RenderSystem extends System {
     views = new Hash<Sprite>();
   }
 
-  override public function added(e : Entity) : Void {
+  private function addView(e : Entity) : Void {
     var viewDef : View = View.ret.get(e);
     var sprite : Sprite = null;
     switch (viewDef.type) {
@@ -34,6 +34,10 @@ class RenderSystem extends System {
       canvas.addChild(sprite);
       views.set(e.id, sprite);
     }
+  }
+
+  override public function added(e : Entity) : Void {
+    addView(e);
   }
 
   override public function removed(e : Entity) : Void {

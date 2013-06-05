@@ -36,6 +36,7 @@ class System extends EventEmitter {
     for (entity in board) {
       if (isInteresed(entity)) {
         entities.add(entity);
+        added(entity);
       }
     }
     board.on('entity_added', onEntityAddedToBoard);
@@ -51,8 +52,8 @@ class System extends EventEmitter {
   private function onEntityAddedToBoard(event : Dynamic) : Void {
     if (isInteresed(event.entity)) {
       entities.add(event.entity);
+      added(event.entity);
     }
-    added(event.entity);
   }
 
   private function onEntityRemovedFromBoard(event : Dynamic) : Void {

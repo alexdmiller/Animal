@@ -20,7 +20,7 @@ class GameBoard extends EventEmitter {
     //idPool = new IDPool();
   }
 
-  public function createEntity(components : Array<Component>, ?id : String = null) : Entity {
+  public function createEntity(?components : Array<Component> = null, ?id : String = null) : Entity {
     var entity = new Entity(id);
     if (id != null) {
       if (idToEntities.exists(id)) {
@@ -28,9 +28,12 @@ class GameBoard extends EventEmitter {
       }
       idToEntities.set(id, entity);
     }
-    for (c in components) {
-      entity.addComponent(c);
+    if (components != null) {
+      for (c in components) {
+        entity.addComponent(c);
+      }
     }
+    
     entities.add(entity);
     entity.on('component_added', onComponentAddedToEntity);
     entity.on('component_removed', onComponentRemovedFromEntity);

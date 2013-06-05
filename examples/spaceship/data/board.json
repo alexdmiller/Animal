@@ -1,0 +1,12 @@
+{
+  "entities": [
+    [
+      {"type": "components.Position", "data": {"x": 10, "y": 100}},
+      {"type": "components.Velocity", "data": {"x": 1, "y": 0.5}},
+      {"type": "components.MaterialProperties", "data": {"friction": 0.9}},
+      {"type": "components.View", "data": {"type": "ship"}},
+      {"type": "components.KeyboardControlled", "data": {"up": 87, "down": 83, "left": 65, "right": 68}},
+      {"type": "components.Shooter"}
+    ]
+  ]
+}
