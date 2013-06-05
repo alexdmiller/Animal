@@ -11,11 +11,8 @@ class GameBoardSerialize {
     var board : GameBoard = new GameBoard();
     var entities : Array<Dynamic> = jsonObject.entities;
     for (entityDef in entities) {
-      var e : Entity = board.createEntity();
-      var components : Array<Dynamic> = entityDef;
-      for (componentDef in components) {
-        e.addComponent(ComponentSerialize.decodeJSON(componentDef));
-      }
+      var e : Entity = EntitySerialize.decodeJSON(entityDef);
+      board.addEntity(e);
     }
     return board;
   }

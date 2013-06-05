@@ -21,6 +21,14 @@ class ComponentSerialize {
     return decodeJSON(jsonObject);
   }
 
+  public static function decodeJSONList(jsonObjects : Array<Dynamic>) : Array<Component> {
+    var components : Array<Component> = new Array<Component>();
+    for (componentDef in jsonObjects) {
+      components.push(decodeJSON(componentDef));
+    }
+    return components;
+  }
+
   public static function encode(component : Component) : String {
     return "";
   }

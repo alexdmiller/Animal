@@ -20,25 +20,17 @@ class GameBoard extends EventEmitter {
     //idPool = new IDPool();
   }
 
-  public function createEntity(?components : Array<Component> = null, ?id : String = null) : Entity {
-    var entity = new Entity(id);
-    if (id != null) {
-      if (idToEntities.exists(id)) {
-        throw "Cannot create Entity with id " + id + " because the GameBoard already has an Entity with that id.";
-      }
-      idToEntities.set(id, entity);
-    }
-    if (components != null) {
-      for (c in components) {
-        entity.addComponent(c);
-      }
-    }
-    
+  public function addEntity(entity : Entity) : Void {
+    // if (id != null) {
+    //   if (idToEntities.exists(id)) {
+    //     throw "Cannot create Entity with id " + id + " because the GameBoard already has an Entity with that id.";
+    //   }
+    //   idToEntities.set(id, entity);
+    // }    
     entities.add(entity);
     entity.on('component_added', onComponentAddedToEntity);
     entity.on('component_removed', onComponentRemovedFromEntity);
     dispatch('entity_added', { entity: entity });
-    return entity;
   }
 
   public function removeEntity(entity : Entity) : Void {
