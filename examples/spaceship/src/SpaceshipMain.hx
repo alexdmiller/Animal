@@ -31,6 +31,7 @@ class SpaceshipMain {
     var e : Entity = board.createEntity([
       ComponentType.decodeString('{"type": "components.Position", "data": {"x": 10, "y": 100}}'),
       ComponentType.decodeString('{"type": "components.Velocity", "data": {"x": 1, "y": 0.5}}'),
+      ComponentType.decodeString('{"type": "components.MaterialProperties", "data": {"friction": 0.9}}'),
       ComponentType.decodeString('{"type": "components.View", "data": {"type": "ship"}}'),
       ComponentType.decodeString('{"type": "components.KeyboardControlled", "data": {"up": 38, "down": 40, "left": 37, "right": 39}}'),
       ComponentType.decodeString('{"type": "components.Shooter"}'),

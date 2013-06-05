@@ -31,6 +31,10 @@ class ShootingSystem extends System {
         ComponentType.decodeJSON({
           type: 'components.Position',
           data: { x: position.x, y: position.y }
+        }),
+        ComponentType.decodeJSON({
+          type: 'components.Velocity',
+          data: { x: 2, y: 2 }
         })
       ]);  
     }

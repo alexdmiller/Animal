@@ -13,4 +13,8 @@ class ComponentRetriever<T> {
   public function get(entity : Entity) : T {
     return cast entity.getComponentWithName(name);
   }
+
+  public function has(entity : Entity) : Bool {
+    return entity.hasComponentWithName(name);
+  }
 }
