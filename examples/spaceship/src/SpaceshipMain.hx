@@ -9,6 +9,7 @@ import animal.serialization.ComponentType;
 import systems.PhysicsSystem;
 import systems.RenderSystem;
 import systems.KeyboardControlSystem;
+import systems.ShootingSystem;
 
 class SpaceshipMain {
   private static var board : GameBoard;
@@ -24,11 +25,14 @@ class SpaceshipMain {
     var keyboardSystem : KeyboardControlSystem = new KeyboardControlSystem(flash.Lib.current.stage);
     board.addSystem(keyboardSystem);
 
+    var shootingSystem : ShootingSystem = new ShootingSystem(flash.Lib.current.stage);
+    board.addSystem(shootingSystem);
+
     var e : Entity = board.createEntity([
-      ComponentType.decode('{"type": "components.Position", "data": {"x": 10, "y": 100}}'),
-      ComponentType.decode('{"type": "components.Velocity", "data": {"x": 1, "y": 0.5}}'),
-      ComponentType.decode('{"type": "components.View", "data": {"type": "ship"}}'),
-      ComponentType.decode('{"type": "components.KeyboardControlled", "data": {"up": 38, "down": 40, "left": 37, "right": 39}}')
+      ComponentType.decodeString('{"type": "components.Position", "data": {"x": 10, "y": 100}}'),
+      ComponentType.decodeString('{"type": "components.Velocity", "data": {"x": 1, "y": 0.5}}'),
+      ComponentType.decodeString('{"type": "components.View", "data": {"type": "ship"}}'),
+      ComponentType.decodeString('{"type": "components.KeyboardControlled", "data": {"up": 38, "down": 40, "left": 37, "right": 39}}')
     ]);
 
     flash.Lib.current.addEventListener(Event.ENTER_FRAME, onEnterFrame);
